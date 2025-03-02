@@ -11,6 +11,13 @@ function App() {
     setList([...list, name]);
     // list.push(name);
     }
+  
+    const removeElement = i => {
+      const updatedList = list.filter((element, index) => {
+      return index !== i
+      });
+      setList(updatedList);
+    }
 
   return (
     <>
@@ -24,17 +31,19 @@ function App() {
       </form>
 
       <ul className=" containere d-flex flex-column">
-      {list.map( (element) =>{
-                return(
-                  <li
-                    className="list-element"
-                    key={element.id}
-                  >
-                    {element.title}
-                  </li>
-                )
-              }      
+      {list.map((element, index) => (
+              <li
+               key={index}>
+                <span>{typeof element === "string" ? element : element.title}</span>
+                <button
+                onClick={() => removeElement(index)}>
+                  X
+                </button>
+              </li>
+
+      )
       )}
+
       </ul>
             
     </>
